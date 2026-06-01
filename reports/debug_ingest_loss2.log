@@ -1,0 +1,31 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+================================================================================
+Local JSONL event_type counts
+================================================================================
+  AuditLogs                      12
+  AzureActivity                  6
+  CommonSecurityLog              84
+  DeviceFileEvents               9
+  OfficeActivity                 203
+  SecurityEvent                  61
+  SigninLogs                     69
+  ThreatIntelIndicators          1
+  TOTAL                          445
+
+================================================================================
+Step 2: ingesting 5 marker-tagged CSL events (loss-probe-1780246593)
+================================================================================
+addEvents -> {"bytesCharged": 0, "status": "success"}
+waiting 10 s for indexing ...
+probe query -> matching=0.0, rows=[]
+
+================================================================================
+Step 3: full bulk ingest of every event in JSONL
+================================================================================
+Traceback (most recent call last):
+  File "/Users/marc.chisinevski/.codeium/windsurf/s1-claude-skills/kql-to-pq/harness/debug_ingest_loss.py", line 78, in <module>
+    sent = ingest_jsonl(JSONL)
+  File "/Users/marc.chisinevski/.codeium/windsurf/s1-claude-skills/kql-to-pq/harness/sdl_client.py", line 85, in ingest_jsonl
+    raise RuntimeError(f"addEvents rejected batch: {r}")
+RuntimeError: addEvents rejected batch: {'bytesCharged': 0, 'status': 'success'}

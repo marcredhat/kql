@@ -1,0 +1,9 @@
+let timeframe = 1d; let lookback = 7d;
+let Recent = SigninLogs | where TimeGenerated > ago(timeframe) | where ResultType == 0;
+let Baseline = SigninLogs
+  | where TimeGenerated between(ago(lookback + timeframe) .. ago(timeframe))
+  | where ResultType == 0
+  | summarize by AppDisplayName, UserAgent;
+Recent
+| join kind=leftanti Baseline on AppDisplayName, UserAgent
+| project TimeGenerated, UserPrincipalName, AppDisplayName, UserAgent

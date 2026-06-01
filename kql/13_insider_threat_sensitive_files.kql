@@ -1,0 +1,7 @@
+DeviceFileEvents
+| where FileName endswith ".docx" or FileName endswith ".pdf" or FileName endswith ".xlsx"
+| where FolderPath contains "Confidential" or FolderPath contains "Sensitive"
+       or FolderPath contains "Restricted"
+| where ActionType in ("FileAccessed","FileRead","FileModified","FileCopied","FileMoved")
+| extend User = tostring(InitiatingProcessAccountName)
+| summarize AccessCount = count() by FileName, User

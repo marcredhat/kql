@@ -1,0 +1,18 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+probe = 10eecdaa
+body size = 217698 bytes (445 lines)
+HTTP 200 -> {"status":"success"}
+
+Waiting 15 s ...
+[sdl_client] session = kql-proof-22f35fda-cce9-4b85-9a2b-6129180e0b04
+
+Query result: matching=445.0
+  {'event_type': 'AuditLogs', 'n': 12}
+  {'event_type': 'AzureActivity', 'n': 6}
+  {'event_type': 'CommonSecurityLog', 'n': 84}
+  {'event_type': 'DeviceFileEvents', 'n': 9}
+  {'event_type': 'OfficeActivity', 'n': 203}
+  {'event_type': 'SecurityEvent', 'n': 61}
+  {'event_type': 'SigninLogs', 'n': 69}
+  {'event_type': 'ThreatIntelIndicators', 'n': 1}

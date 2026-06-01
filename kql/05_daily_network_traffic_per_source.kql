@@ -1,0 +1,7 @@
+CommonSecurityLog
+| where TimeGenerated > ago(1d)
+| summarize Count = count(),
+            DistinctDestinationIps = dcount(DestinationIP),
+            NoofBytesTransferred = sum(SentBytes),
+            NoofBytesReceived = sum(ReceivedBytes)
+    by SourceIP, DeviceVendor

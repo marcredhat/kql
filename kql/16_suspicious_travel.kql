@@ -1,0 +1,3 @@
+SigninLogs | where TimeGenerated > ago(1d) | where ResultType == 0
+| summarize CountriesAccessed = make_set(Location) by UserPrincipalName
+| where array_length(CountriesAccessed) > 3

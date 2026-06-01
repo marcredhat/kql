@@ -1,0 +1,41 @@
+// 90-day cross-source hunt: failed Entra sign-ins ∧ bad-domain DNS ∧
+// LOLBin process execution on the SAME user/host.
+//
+// Paste into a Microsoft Sentinel workspace that has SigninLogs +
+// _Im_Dns + _Im_ProcessEvent populated.
+//
+// Known cliffs on a real workspace at 90d:
+//   * memory pressure on _Im_ProcessEvent
+//   * has_any on ProcessCommandLine bypasses the term index
+//   * hint.shufflekey is required to avoid OOM on the cross-table join
+
+let suspect_domains = dynamic([
+    "c2.example.com",
+    "suspect.example.net"
+]);
+let lolbins = dynamic([
+    "powershell", "rundll32", "mshta"
+]);
+let suspicious_users =
+    SigninLogs
+    | where TimeGenerated > ago(90d)
+    | where ResultType != 0 or RiskLevelDuringSignIn == "high"
+    | summarize FailedSignins = count() by UserPrincipalName;
+let bad_dns =
+    _Im_Dns(starttime=ago(90d))
+    | where DnsQuery has_any (suspect_domains)
+    | project TimeGenerated, SrcIpAddr, DnsQuery, UserName = SrcUsername;
+_Im_ProcessEvent(starttime=ago(90d))
+| where ProcessCommandLine has_any (lolbins)
+| join kind=inner hint.strategy=shuffle hint.shufflekey=DvcHostname (
+    bad_dns
+    | extend DvcHostname = tostring(SrcIpAddr)
+  ) on DvcHostname
+| join kind=inner (suspicious_users)
+    on $left.ActorUsername == $right.UserPrincipalName
+| summarize Hits = count(),
+            Domains = make_set(DnsQuery, 20),
+            Cmdlines = make_set(ProcessCommandLine, 20)
+    by ActorUsername, DvcHostname
+| order by Hits desc
+| take 100

@@ -1,0 +1,42 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-0587d7de-8f44-4e70-ad21-c79fae1d4821
+================================================================================
+Local JSONL event_type counts
+================================================================================
+  AuditLogs                      12
+  AzureActivity                  6
+  CommonSecurityLog              84
+  DeviceFileEvents               9
+  OfficeActivity                 203
+  SecurityEvent                  61
+  SigninLogs                     69
+  ThreatIntelIndicators          1
+  TOTAL                          445
+
+================================================================================
+Step 2: ingesting 5 marker-tagged CSL events (loss-probe-1780246719)
+================================================================================
+addEvents -> {"bytesCharged": 0, "status": "success"}
+waiting 10 s for indexing ...
+probe query (1h) -> matching=0.0, rows=[]
+
+================================================================================
+Step 3: full bulk ingest of every event in JSONL
+================================================================================
+ingest_jsonl reports 445 events sent
+waiting 20 s for indexing ...
+
+================================================================================
+Step 4: SDL counts by event_type
+================================================================================
+event_type                        local      SDL    loss%
+------------------------------------------------------------
+AuditLogs                            12        0     100%
+AzureActivity                         6        1      83%
+CommonSecurityLog                    84        1      99%
+DeviceFileEvents                      9        0     100%
+OfficeActivity                      203        1     100%
+SecurityEvent                        61        0     100%
+SigninLogs                           69        0     100%
+ThreatIntelIndicators                 1        0     100%

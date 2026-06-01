@@ -1,0 +1,14 @@
+let threshold = 25;
+let baseline = OfficeActivity
+  | where TimeGenerated between(ago(14d) .. ago(1d))
+  | where RecordType == "SharePointFileOperation"
+  | where Operation in ("FileDownloaded", "FileUploaded")
+  | summarize Count = count() by UserId, Operation, Site_Url, ClientIP
+  | summarize AvgCount = avg(Count) by UserId, Operation, Site_Url, ClientIP;
+let recent = OfficeActivity
+  | where TimeGenerated > ago(1d)
+  | where RecordType == "SharePointFileOperation"
+  | summarize RecentCount = count() by UserId, Operation, Site_Url, ClientIP;
+baseline | join kind=inner (recent) on UserId, Operation, Site_Url, ClientIP
+| extend Deviation = abs(RecentCount - AvgCount) / AvgCount
+| where Deviation > threshold

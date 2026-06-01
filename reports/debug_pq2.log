@@ -1,0 +1,52 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+================================================================================
+# event_type=SigninLogs 7d (no serverHost)  (start=7d)
+  q: event_type='SigninLogs' | columns UserPrincipalName | limit 5
+  status=success matching=5.0 rows=5 took=3.8s
+     {'UserPrincipalName': 'dave@contoso.com'}
+     {'UserPrincipalName': 'dave@contoso.com'}
+     {'UserPrincipalName': 'bob@contoso.com'}
+     {'UserPrincipalName': 'bob@contoso.com'}
+     {'UserPrincipalName': 'carol@contoso.com'}
+================================================================================
+# event_type=SigninLogs 1h  (start=1h)
+  q: event_type='SigninLogs' | columns UserPrincipalName, ts_epoch_ms | limit 5
+  status=success matching=0.0 rows=0 took=2.0s
+================================================================================
+# UserPrincipalName matching contoso  (start=1d)
+  q: UserPrincipalName='alice@contoso.com' | columns event_type, UserPrincipalName | limit 5
+  status=success matching=5.0 rows=5 took=3.8s
+     {'event_type': 'SigninLogs', 'UserPrincipalName': 'alice@contoso.com'}
+     {'event_type': 'SigninLogs', 'UserPrincipalName': 'alice@contoso.com'}
+     {'event_type': 'SigninLogs', 'UserPrincipalName': 'alice@contoso.com'}
+     {'event_type': 'SigninLogs', 'UserPrincipalName': 'alice@contoso.com'}
+     {'event_type': 'SigninLogs', 'UserPrincipalName': 'alice@contoso.com'}
+================================================================================
+# anything from xdr tenant 1h  (start=1h)
+  q: * | columns event_type, serverHost, logfile | limit 5
+  status=error/client/badParam matching=None rows=0 took=0.6s
+  ERROR: {"message": "invalid query: Don't understand [*] -- try enclosing it in quotes", "status": "error/client/badParam"}
+================================================================================
+# logfile contains kql-proof  (start=7d)
+  q: logfile contains 'kql-proof' | columns event_type | limit 5
+  status=success matching=5.0 rows=5 took=3.7s
+     {'event_type': 'SigninLogs'}
+     {'event_type': 'SigninLogs'}
+     {'event_type': 'SigninLogs'}
+     {'event_type': 'SigninLogs'}
+     {'event_type': 'AuditLogs'}
+================================================================================
+# contoso.com in attrs  (start=1d)
+  q: Identity contains 'contoso.com' | columns event_type, Identity | limit 5
+  status=success matching=5.0 rows=5 took=1.7s
+     {'event_type': 'SigninLogs', 'Identity': 'alice@contoso.com'}
+     {'event_type': 'SigninLogs', 'Identity': 'alice@contoso.com'}
+     {'event_type': 'SigninLogs', 'Identity': 'frank@contoso.com'}
+     {'event_type': 'SigninLogs', 'Identity': 'alice@contoso.com'}
+     {'event_type': 'SigninLogs', 'Identity': 'frank@contoso.com'}
+================================================================================
+# test: count any events tenant-wide 5m  (start=5m)
+  q: * | group n=count()
+  status=error/client/badParam matching=None rows=0 took=0.6s
+  ERROR: {"message": "invalid query: Don't understand [*] -- try enclosing it in quotes", "status": "error/client/badParam"}

@@ -1,0 +1,11 @@
+let SensitiveOps = dynamic([
+    "microsoft.compute/snapshots/write",
+    "microsoft.network/networksecuritygroups/write",
+    "microsoft.storage/storageaccounts/listkeys/action"]);
+let threshold = 5;
+AzureActivity
+| where OperationNameValue in~ (SensitiveOps)
+| where ActivityStatusValue =~ "Success"
+| where TimeGenerated >= ago(1d)
+| summarize ActivityCount = count() by CallerIpAddress, Caller, OperationNameValue
+| where ActivityCount >= threshold

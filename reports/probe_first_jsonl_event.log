@@ -1,0 +1,85 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-2987fb30-b85c-4fd7-a8fb-8e6d33f0f46e
+=== Payload (3 events) ===
+[
+  {
+    "ts": "1780217792000000000",
+    "sev": 3,
+    "thread": "T1",
+    "attrs": {
+      "event_type": "SigninLogs",
+      "TimeGenerated": "2026-05-31T08:56:32.000Z",
+      "ts_epoch_ms": 1780217792000,
+      "UserPrincipalName": "alice@contoso.com",
+      "Identity": "alice@contoso.com",
+      "AppDisplayName": "Office 365 Exchange Online",
+      "ResultType": 0,
+      "IPAddress": "10.0.0.20",
+      "Location": "US",
+      "LocationDetails_country": "US",
+      "LocationDetails_state": "HQ",
+      "LocationDetails_city": "HQ",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0) Edge/120.0",
+      "DeviceDetail_os": "Windows 10",
+      "probe": "18ac4061_0"
+    }
+  },
+  {
+    "ts": "1780220192000000000",
+    "sev": 3,
+    "thread": "T1",
+    "attrs": {
+      "event_type": "SigninLogs",
+      "TimeGenerated": "2026-05-31T09:36:32.000Z",
+      "ts_epoch_ms": 1780220192000,
+      "UserPrincipalName": "alice@contoso.com",
+      "Identity": "alice@contoso.com",
+      "AppDisplayName": "Office 365 Exchange Online",
+      "ResultType": 0,
+      "IPAddress": "10.0.0.21",
+      "Location": "US",
+      "LocationDetails_country": "US",
+      "LocationDetails_state": "HQ",
+      "LocationDetails_city": "HQ",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0) Edge/120.0",
+      "DeviceDetail_os": "Windows 10",
+      "probe": "18ac4061_1"
+    }
+  },
+  {
+    "ts": "1780222592000000000",
+    "sev": 3,
+    "thread": "T1",
+    "attrs": {
+      "event_type": "SigninLogs",
+      "TimeGenerated": "2026-05-31T10:16:32.000Z",
+      "ts_epoch_ms": 1780222592000,
+      "UserPrincipalName": "alice@contoso.com",
+      "Identity": "alice@contoso.com",
+      "AppDisplayName": "Office 365 Exchange Online",
+      "ResultType": 0,
+      "IPAddress": "10.0.0.22",
+      "Location": "US",
+      "LocationDetails_country": "US",
+      "LocationDetails_state": "HQ",
+      "LocationDetails_city": "HQ",
+      "UserAgent": "Mozilla/5.0 (Windows NT 10.0) Edge/120.0",
+      "DeviceDetail_os": "Windows 10",
+      "probe": "18ac4061_2"
+    }
+  }
+]
+
+=== Submitting (probe prefix=18ac4061) ===
+addEvents -> {"bytesCharged": 0, "status": "success"}
+
+Waiting 12 s for indexing ...
+
+Query: probe contains '18ac4061' | columns event_type, probe, ts_epoch_ms | limit 10
+Result -> matching=0.0
+
+real_now_ms = 1780246993092
+  event ts_ms=1780217792000  age=486.68 min  attrs.event_type=SigninLogs
+  event ts_ms=1780220192000  age=446.68 min  attrs.event_type=SigninLogs
+  event ts_ms=1780222592000  age=406.68 min  attrs.event_type=SigninLogs

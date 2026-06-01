@@ -1,0 +1,9 @@
+SecurityEvent
+| where TimeGenerated > ago(1d)
+| where EventID == 4688
+| summarize Count = count(),
+            DistinctComputers = dcount(Computer),
+            DistinctAccounts = dcount(Account),
+            DistinctParent = dcount(ParentProcessName),
+            NoofCommandLines = dcount(CommandLine)
+    by NewProcessName

@@ -1,0 +1,9 @@
+let IP_Indicators = ThreatIntelIndicators
+| extend IndicatorType = tostring(split(ObservableKey, ":", 0)[0])
+| where IndicatorType in ("ipv4-addr", "ipv6-addr", "network-traffic")
+| where IsActive == true;
+IP_Indicators
+| join kind=innerunique (
+    CommonSecurityLog | where TimeGenerated >= ago(1h)
+  ) on $left.ObservableValue == $right.DestinationIP
+| project TimeGenerated, SourceIP, DestinationIP, Id, Confidence, DeviceVendor

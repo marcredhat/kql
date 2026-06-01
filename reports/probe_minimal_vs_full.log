@@ -1,0 +1,16 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-828613c9-4ba7-458e-8e80-dae7ee6557f8
+=== Sending 7 probe events ===
+addEvents -> {"bytesCharged": 0, "status": "success"}
+
+Waiting 12 s for indexing ...
+
+=== Per-case verification ===
+  A_minimal_2_attrs                   matching=1.0  status=OK  -> [['CommonSecurityLog', '759b315a_A']]
+  B_one_int_attr                      matching=1.0  status=OK  -> [['CommonSecurityLog', '759b315a_B']]
+  C_one_negative_int                  matching=1.0  status=OK  -> [['CommonSecurityLog', '759b315a_C']]
+  D_with_special_chars                matching=1.0  status=OK  -> [['CommonSecurityLog', '759b315a_D']]
+  E_with_backslashes                  matching=1.0  status=OK  -> [['SecurityEvent', '759b315a_E']]
+  F_realistic_csl_via_clean           matching=1.0  status=OK  -> [['CommonSecurityLog', '759b315a_F']]
+  G_realistic_csl_with_None           matching=1.0  status=OK  -> [['CommonSecurityLog', '759b315a_G']]

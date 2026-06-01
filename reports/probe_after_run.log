@@ -1,0 +1,33 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-c0d2d10b-5952-4900-8dff-0875dd805fe9
+Latest proof_run_id from log: run-a9174a254e)
+
+================================================================================
+# any event for this run
+  q: proof_run_id='run-a9174a254e)' | group n=count()
+  status=success matching=0.0 took=2.0s
+
+================================================================================
+# by event_type for this run
+  q: proof_run_id='run-a9174a254e)' | group n=count() by event_type
+  status=success matching=0.0 took=4.7s
+
+================================================================================
+# all kql-proof logfile (any run)
+  q: logfile contains 'kql-proof' | group n=count() by event_type
+  status=success matching=906.0 took=4.7s
+     {'event_type': 'AuditLogs', 'n': 24}
+     {'event_type': 'AzureActivity', 'n': 13}
+     {'event_type': 'CommonSecurityLog', 'n': 181}
+     {'event_type': 'DeviceFileEvents', 'n': 18}
+     {'event_type': 'OfficeActivity', 'n': 407}
+     {'event_type': 'SecurityEvent', 'n': 123}
+     {'event_type': 'SigninLogs', 'n': 138}
+     {'event_type': 'ThreatIntelIndicators', 'n': 2}
+
+================================================================================
+# rule 1 raw query that errors
+  q: proof_run_id='run-a9174a254e)' event_type='SigninLogs' | filter ts_epoch_ms >= 0 | group LocationCount = estimate_distinct(Location), LocationList = group_unique_values(Location), LogonCount = count() by UserPrincipalName, AppDisplayName | filter LocationCount >= 3
+  status=error/client/badParam matching=None took=0.8s
+  ERROR: {"message": "invalid query: Unknown function 'group_unique_values'", "status": "error/client/badParam"}

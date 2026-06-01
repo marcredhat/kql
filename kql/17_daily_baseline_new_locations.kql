@@ -1,0 +1,9 @@
+let historical = SigninLogs
+  | where ResultType == 0
+  | where TimeGenerated between (ago(14d) .. ago(1d))
+  | summarize HistoricalCountries = make_set(Location) by UserPrincipalName;
+SigninLogs | where ResultType == 0 | where TimeGenerated > ago(1d)
+| summarize TodayCountries = make_set(Location) by UserPrincipalName
+| join kind=inner (historical) on UserPrincipalName
+| extend NewLocations = set_difference(TodayCountries, HistoricalCountries)
+| where array_length(NewLocations) > 0

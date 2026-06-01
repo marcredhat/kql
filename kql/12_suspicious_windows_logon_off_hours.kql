@@ -1,0 +1,13 @@
+let baseline = SecurityEvent
+  | where TimeGenerated between (ago(14d) .. ago(1d))
+  | where EventID in (4624, 4625)
+  | where LogonTypeName in~ ("2 - Interactive", "10 - RemoteInteractive")
+  | where AccountType =~ "User"
+  | extend HourOfLogin = hourofday(TimeGenerated)
+  | summarize MaxHour = max(HourOfLogin), MinHour = min(HourOfLogin) by TargetUserName;
+SecurityEvent
+| where TimeGenerated >= ago(1d) | where EventID in (4624, 4625)
+| where LogonTypeName in~ ("2 - Interactive", "10 - RemoteInteractive")
+| extend HourOfLogin = hourofday(TimeGenerated)
+| join kind=inner baseline on TargetUserName
+| where HourOfLogin > MaxHour or HourOfLogin < MinHour

@@ -1,0 +1,22 @@
+SigninLogs
+| where TimeGenerated > ago(1d)
+| extend locationString = strcat(tostring(LocationDetails["countryOrRegion"]), "/",
+                                 tostring(LocationDetails["state"]), "/",
+                                 tostring(LocationDetails["city"]), ";")
+| project TimeGenerated, AppDisplayName, UserPrincipalName, locationString
+| make-series dLocationCount = dcount(locationString) on TimeGenerated step 1d
+        by UserPrincipalName, AppDisplayName
+| extend (RSquare, Slope, Variance, RVariance, Interception, LineFit)
+       = series_fit_line(dLocationCount)
+| top 3 by Slope desc
+| join kind=inner (
+    SigninLogs
+    | extend locationString = strcat(tostring(LocationDetails["countryOrRegion"]),
+        "/", tostring(LocationDetails["state"]), "/",
+        tostring(LocationDetails["city"]), ";")
+    | summarize locationList = makeset(locationString),
+                threeDayWindowLocationCount = dcount(locationString)
+        by AppDisplayName, UserPrincipalName, timerange = bin(TimeGenerated, 21d)
+  ) on AppDisplayName, UserPrincipalName
+| project timerange, AppDisplayName, UserPrincipalName,
+          threeDayWindowLocationCount, locationList

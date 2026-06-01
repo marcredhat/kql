@@ -1,0 +1,11 @@
+let TotalEventsThreshold = 30; let PercentBeaconThreshold = 80;
+CommonSecurityLog
+| where DeviceVendor == "Palo Alto Networks" and Activity == "TRAFFIC"
+| where TimeGenerated > ago(1d)
+| sort by SourceIP asc, TimeGenerated asc
+| serialize | extend nextT = next(TimeGenerated, 1), nextIP = next(SourceIP, 1)
+| extend Delta = datetime_diff('second', nextT, TimeGenerated)
+| where SourceIP == nextIP and Delta > 25
+| summarize TotalEvents = count(), ModalDelta = arg_max(count(), Delta)
+        by SourceIP, DestinationIP, DestinationPort
+| where TotalEvents > TotalEventsThreshold

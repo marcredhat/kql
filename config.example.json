@@ -1,0 +1,8 @@
+{
+  "base_url": "https://<your-tenant>.sentinelone.net/",
+  "log_write_key": "<SDL_LOG_WRITE_KEY>",
+  "log_read_key": "<SDL_LOG_READ_KEY>",
+  "session_id": "kql-proof",
+  "verify_tls": true,
+  "timeout_seconds": 60
+}

@@ -1,0 +1,39 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-7a2a3e4a-a6b7-4a15-bcfc-a25476b595a9
+RUN = run-9c02f87a3f
+RECENT_MS = 1780240728000
+
+================================================================================
+# rule 4 exact
+  q: proof_run_id='run-9c02f87a3f' event_type='SigninLogs' | filter ts_epoch_ms >= 1780240728000 | group LocationCount = estimate_distinct(Location), DistinctSourceIp = estimate_distinct(IPAddress), LogonC
+  status=success matching=39.0 rows=9
+    {'AppDisplayName': 'Azure Portal', 'UserPrincipalName': 'dave@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 1.0, 'LogonCount': 1}
+    {'AppDisplayName': 'Azure Portal', 'UserPrincipalName': 'eve@contoso.com', 'LocationCount': 10.0, 'DistinctSourceIp': 10.0, 'LogonCount': 10}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'bob@contoso.com', 'LocationCount': 4.0, 'DistinctSourceIp': 4.0, 'LogonCount': 4}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'alice@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 1.0, 'LogonCount': 4}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'bob@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 1.0, 'LogonCount': 4}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'carol@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 1.0, 'LogonCount': 4}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'dave@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 1.0, 'LogonCount': 4}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'eve@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 1.0, 'LogonCount': 4}
+================================================================================
+# rule 4 without ts filter
+  q: proof_run_id='run-9c02f87a3f' event_type='SigninLogs' | group LocationCount = estimate_distinct(Location), DistinctSourceIp = estimate_distinct(IPAddress), LogonCount = count() by AppDisplayName, User
+  status=success matching=69.0 rows=13
+    {'AppDisplayName': 'Azure Portal', 'UserPrincipalName': 'dave@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 1.0, 'LogonCount': 1}
+    {'AppDisplayName': 'Azure Portal', 'UserPrincipalName': 'eve@contoso.com', 'LocationCount': 10.0, 'DistinctSourceIp': 10.0, 'LogonCount': 10}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'alice@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 3.0, 'LogonCount': 3}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'bob@contoso.com', 'LocationCount': 4.0, 'DistinctSourceIp': 7.0, 'LogonCount': 7}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'carol@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 3.0, 'LogonCount': 3}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'dave@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 3.0, 'LogonCount': 3}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'eve@contoso.com', 'LocationCount': 1.0, 'DistinctSourceIp': 3.0, 'LogonCount': 3}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'alice@contoso.com', 'LocationCount': 2.0, 'DistinctSourceIp': 4.0, 'LogonCount': 7}
+================================================================================
+# show 5 SigninLogs columns
+  q: proof_run_id='run-9c02f87a3f' event_type='SigninLogs' | columns AppDisplayName, UserPrincipalName, Location, IPAddress, ts_epoch_ms | limit 5
+  status=success matching=5.0 rows=5
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'alice@contoso.com', 'Location': 'US', 'IPAddress': '10.0.0.20', 'ts_epoch_ms': 1780219128000}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'alice@contoso.com', 'Location': 'US', 'IPAddress': '10.0.0.21', 'ts_epoch_ms': 1780221528000}
+    {'AppDisplayName': 'Office 365 Exchange Online', 'UserPrincipalName': 'alice@contoso.com', 'Location': 'US', 'IPAddress': '10.0.0.22', 'ts_epoch_ms': 1780223928000}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'alice@contoso.com', 'Location': 'US', 'IPAddress': '10.0.0.20', 'ts_epoch_ms': 1780219128000}
+    {'AppDisplayName': 'Microsoft Teams', 'UserPrincipalName': 'alice@contoso.com', 'Location': 'US', 'IPAddress': '10.0.0.21', 'ts_epoch_ms': 1780221528000}

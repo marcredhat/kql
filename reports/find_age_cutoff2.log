@@ -1,0 +1,36 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-64201002-a39c-4fc1-81db-eb0c568f6e81
+[sdl_client] session = kql-proof-8cc119dc-7036-4bd1-adf3-24e9bc0686af
+age=   0.5 min  session=24e9bc0686af  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-d4a3b00d-d2ac-4cdd-9510-973003bc3055
+age=     5 min  session=973003bc3055  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-1f101b96-1831-4db7-bf9d-ff704b97ba93
+age=    30 min  session=ff704b97ba93  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-cd83a4c0-b91d-4ebb-b5e8-e8d08a9be2b5
+age=    60 min  session=e8d08a9be2b5  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-488737cf-f9b9-4732-9037-ef21a726ec07
+age=   120 min  session=ef21a726ec07  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-e7df8519-ff5d-472b-949c-dc1eb4dec8e1
+age=   240 min  session=dc1eb4dec8e1  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-0a8ac536-a781-4b53-8a5f-a362f268c2d2
+age=   480 min  session=a362f268c2d2  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-efe9ed8a-207f-4a7a-84f5-abd2c070a178
+age=   720 min  session=abd2c070a178  addEvents={'bytesCharged': 0, 'status': 'success'}
+[sdl_client] session = kql-proof-d55d5ce5-e164-4c92-859a-681c29acb4cf
+age=  1440 min  session=681c29acb4cf  addEvents={'bytesCharged': 0, 'status': 'success'}
+
+Waiting 12 s ...
+
+Query matching=1.0
+
+ age_min   queryable
+     0.5             NO
+       5             NO
+      30             NO
+      60             NO
+     120             NO
+     240             NO
+     480             NO
+     720             NO
+    1440            YES

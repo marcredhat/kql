@@ -1,0 +1,139 @@
+==================================================================
+STEP 1/5  Regenerate deterministic sample dataset
+==================================================================
+NOW = 2026-05-31T18:27:24+00:00
+BASELINE = 2026-05-31T10:27:24+00:00 .. 2026-05-31T16:27:24+00:00
+RECENT = 2026-05-31T16:27:24+00:00 .. 2026-05-31T18:27:24+00:00
+Wrote 445 events -> /Users/marc.chisinevski/.codeium/windsurf/s1-claude-skills/kql-to-pq/sample_data/events.jsonl
+Wrote anchor -> /Users/marc.chisinevski/.codeium/windsurf/s1-claude-skills/kql-to-pq/sample_data/time_anchor.json
+
+==================================================================
+STEP 2/5  Export KQL and PowerQuery files (with anti-pattern scan)
+==================================================================
+✓ Exported 17 rules to kql/ and pq/
+  (RECENT_MS = 1780244844000 = 2026-05-31T16:27:24+00:00)
+KQL files:
+  01_anomalous_signin_location_increase.kql
+  02_rare_audit_activity_by_app.kql
+  03_azure_rare_subscription_ops.kql
+  04_daily_signin_location_trend.kql
+  05_daily_network_traffic_per_source.kql
+  06_daily_process_execution_trend.kql
+  07_rare_user_agent_by_app.kql
+  08_network_ioc_match.kql
+  09_new_processes_24h.kql
+  10_sharepoint_anomaly.kql
+  11_palo_alto_beacon.kql
+  12_suspicious_windows_logon_off_hours.kql
+  13_insider_threat_sensitive_files.kql
+  14_priv_escalation.kql
+  15_slow_brute_force.kql
+  16_suspicious_travel.kql
+  17_daily_baseline_new_locations.kql
+PQ  files:
+  01_anomalous_signin_location_increase.pq
+  02_rare_audit_activity_by_app.pq
+  03_azure_rare_subscription_ops.pq
+  04_daily_signin_location_trend.pq
+  05_daily_network_traffic_per_source.pq
+  06_daily_process_execution_trend.pq
+  07_rare_user_agent_by_app.pq
+  08_network_ioc_match.pq
+  09_new_processes_24h.pq
+  10_sharepoint_anomaly.pq
+  11_palo_alto_beacon.pq
+  12_suspicious_windows_logon_off_hours.pq
+  13_insider_threat_sensitive_files.pq
+  14_priv_escalation.pq
+  15_slow_brute_force.pq
+  16_suspicious_travel.pq
+  17_daily_baseline_new_locations.pq
+
+==================================================================
+STEP 3/5  Ingest sample dataset to SDL + execute PowerQueries
+==================================================================
+Loaded 445 events
+Local reference: 39 total fired rows across 17 rules
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-86c4db1e-a4bd-42a8-addf-f71be31b8161
+Ingested 445 events to SDL  (proof_run_id=run-cf5fd1cd08)
+Waiting for SDL indexing ... 445 ✓ ready
+  scope     = proof_run_id='run-cf5fd1cd08'
+  RECENT_MS = 1780244844000  (2026-05-31T16:27:24+00:00)
+  NOW       = 2026-05-31T18:27:24+00:00
+
+  [ 1/17] 01_anomalous_signin_location_increase            ->   2 rows  matching=39.0 (1.8s, success)
+  [ 2/17] 02_rare_audit_activity_by_app                    ->   2 rows  matching=2.0 (2.1s, success)
+  [ 3/17] 03_azure_rare_subscription_ops                   ->   1 rows  matching=6.0 (2.5s, success)
+  [ 4/17] 04_daily_signin_location_trend                   ->   9 rows  matching=39.0 (2.4s, success)
+  [ 5/17] 05_daily_network_traffic_per_source              ->   3 rows  matching=64.0 (3.4s, success)
+  [ 6/17] 06_daily_process_execution_trend                 ->   5 rows  matching=5.0 (3.2s, success)
+  [ 7/17] 07_rare_user_agent_by_app                        ->   1 rows  matching=15.0 (2.1s, success)
+  [ 8/17] 08_network_ioc_match                             ->   2 rows  matching=61.0 (5.3s, success)
+  [ 9/17] 09_new_processes_24h                             ->   1 rows  matching=1.0 (3.2s, success)
+  [10/17] 10_sharepoint_anomaly                            ->   1 rows  matching=200.0 (2.2s, success)
+  [11/17] 11_palo_alto_beacon                              ->   1 rows  matching=64.0 (2.3s, success)
+  [12/17] 12_suspicious_windows_logon_off_hours            ->   1 rows  matching=1.0 (2.4s, success)
+  [13/17] 13_insider_threat_sensitive_files                ->   3 rows  matching=9.0 (5.1s, success)
+  [14/17] 14_priv_escalation                               ->   1 rows  matching=1.0 (3.0s, success)
+  [15/17] 15_slow_brute_force                              ->   1 rows  matching=24.0 (3.2s, success)
+  [16/17] 16_suspicious_travel                             ->   2 rows  matching=15.0 (2.9s, success)
+  [17/17] 17_daily_baseline_new_locations                  ->   3 rows  matching=15.0 (2.4s, success)
+Wrote /Users/marc.chisinevski/.codeium/windsurf/s1-claude-skills/kql-to-pq/reports/PROOF.md
+
+==================================================================
+STEP 4/5  Side-by-side comparison summary
+==================================================================
+Rule                                            Ref rows  SDL rows Status    
+--------------------------------------------------------------------------------
+01_anomalous_signin_location_increase                  2         2 OK        
+02_rare_audit_activity_by_app                          2         2 OK        
+03_azure_rare_subscription_ops                         1         1 OK        
+04_daily_signin_location_trend                         9         9 OK        
+05_daily_network_traffic_per_source                    3         3 OK        
+06_daily_process_execution_trend                       5         5 OK        
+07_rare_user_agent_by_app                              2         1 OK        
+08_network_ioc_match                                   2         2 OK        
+09_new_processes_24h                                   1         1 OK        
+10_sharepoint_anomaly                                  1         1 OK        
+11_palo_alto_beacon                                    1         1 OK        
+12_suspicious_windows_logon_off_hours                  1         1 OK        
+13_insider_threat_sensitive_files                      3         3 OK        
+14_priv_escalation                                     1         1 OK        
+15_slow_brute_force                                    1         1 OK        
+16_suspicious_travel                                   2         2 OK        
+17_daily_baseline_new_locations                        2         3 OK        
+--------------------------------------------------------------------------------
+OK: 17   EMPTY: 0   ERROR: 0
+
+Full report: reports/PROOF.md
+
+==================================================================
+STEP 5/5  Verify each pq/*.pq runs cleanly on SDL as-written
+          (proof that pasted-as-is queries return status=success)
+==================================================================
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-522c2f83-8d0b-490f-a46e-63bb41cc8b4d
+Verifying 17 .pq files run cleanly on SDL ...
+
+  ✓ 01_anomalous_signin_location_increase.pq                matching=63.0 (3.3s)
+  ✓ 02_rare_audit_activity_by_app.pq                        matching=3.0 (3.0s)
+  ✓ 03_azure_rare_subscription_ops.pq                       matching=48.0 (2.5s)
+  ✓ 04_daily_signin_location_trend.pq                       matching=63.0 (3.9s)
+  ✓ 05_daily_network_traffic_per_source.pq                  matching=126.0 (2.7s)
+  ✓ 06_daily_process_execution_trend.pq                     matching=10.0 (2.1s)
+  ✓ 07_rare_user_agent_by_app.pq                            matching=20.0 (3.7s)
+  ✓ 08_network_ioc_match.pq                                 matching=118.0 (2.2s)
+  ✓ 09_new_processes_24h.pq                                 matching=2.0 (3.1s)
+  ✓ 10_sharepoint_anomaly.pq                                matching=400.0 (3.1s)
+  ✓ 11_palo_alto_beacon.pq                                  matching=125.0 (3.6s)
+  ✓ 12_suspicious_windows_logon_off_hours.pq                matching=1.0 (3.1s)
+  ✓ 13_insider_threat_sensitive_files.pq                    matching=18.0 (4.5s)
+  ✓ 14_priv_escalation.pq                                   matching=1.0 (3.4s)
+  ✓ 15_slow_brute_force.pq                                  matching=43.0 (2.6s)
+  ✓ 16_suspicious_travel.pq                                 matching=20.0 (3.8s)
+  ✓ 17_daily_baseline_new_locations.pq                      matching=20.0 (3.9s)
+
+PASS: 17    FAIL: 0

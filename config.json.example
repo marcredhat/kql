@@ -1,0 +1,8 @@
+{
+  "base_url": "https://xdr.us1.sentinelone.net/",
+  "log_write_key": "REPLACE_WITH_YOUR_SDL_LOG_WRITE_KEY",
+  "log_read_key": "REPLACE_WITH_YOUR_SDL_LOG_WRITE_KEY",
+  "session_id": "kql-proof-2026-05-31-v2",
+  "verify_tls": true,
+  "timeout_seconds": 60
+}

@@ -1,0 +1,29 @@
+==================================================================
+Step 1/5  Verify .gitignore covers secrets
+==================================================================
+  config.json is gitignored ✓
+  reports/* gitignored ✓
+
+==================================================================
+Step 2/5  Scan all candidate-tracked files for secrets
+==================================================================
+  No JWTs in any to-be-committed file ✓
+
+==================================================================
+Step 3/5  Initialise fresh git repo inside /Users/marc.chisinevski/.codeium/windsurf/s1-claude-skills/kql-to-pq
+==================================================================
+  d874181 Initial commit: KQL ↔ SDL PowerQuery proof of equivalence
+  84 files staged
+
+==================================================================
+Step 4/5  Add remote https://github.com/marcredhat/kql.git
+==================================================================
+  remote: origin	https://github.com/marcredhat/kql.git (fetch)
+
+==================================================================
+Step 5/5  Push (force) to origin main
+==================================================================
+To https://github.com/marcredhat/kql.git
+ + 31d2c23...d874181 main -> main (forced update)
+branch 'main' set up to track 'origin/main'.
+  ✓ Published to https://github.com/marcredhat/kql.git

@@ -1,0 +1,12 @@
+event_type                       events  uniq_ts  collision_loss%
+----------------------------------------------------------------------
+AuditLogs                            12       12             0.0%
+AzureActivity                         6        6             0.0%
+CommonSecurityLog                    84       84             0.0%
+DeviceFileEvents                      9        1            88.9%
+OfficeActivity                      203      203             0.0%
+SecurityEvent                        61       53            13.1%
+SigninLogs                           69       45            34.8%
+ThreatIntelIndicators                 1        1             0.0%
+----------------------------------------------------------------------
+TOTAL                               445      405

@@ -1,0 +1,8 @@
+AuditLogs
+| where TimeGenerated > ago(1d)
+| where OperationName has_any ("Add service principal","Certificates and secrets management")
+| extend Actor = tostring(parse_json(tostring(InitiatedBy.user)).userPrincipalName)
+| join kind=inner (
+    SigninLogs | where ResultType == 0 and TimeGenerated > ago(1d)
+    | project LoginTime = TimeGenerated, Identity, IPAddress, AppDisplayName
+  ) on $left.Actor == $right.Identity

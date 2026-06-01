@@ -1,0 +1,10 @@
+SigninLogs
+| where TimeGenerated > ago(1d)
+| extend locationString = strcat(tostring(LocationDetails["countryOrRegion"]), "/",
+        tostring(LocationDetails["state"]), "/", tostring(LocationDetails["city"]), ";")
+| extend Day = format_datetime(TimeGenerated, "yyyy-MM-dd")
+| summarize LocationList = make_set(locationString),
+            LocationCount = dcount(locationString),
+            DistinctSourceIp = dcount(IPAddress),
+            LogonCount = count()
+    by Day, AppDisplayName, UserPrincipalName

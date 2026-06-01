@@ -1,0 +1,13 @@
+let auditLookback = ago(14d);
+let baseline = AuditLogs
+  | where TimeGenerated between(auditLookback..ago(1d))
+  | extend InitiatedByApp = tostring(parse_json(tostring(InitiatedBy.app)).displayName)
+  | where isnotempty(InitiatedByApp)
+  | summarize by OperationName, InitiatedByApp;
+AuditLogs
+| where TimeGenerated >= ago(1d)
+| extend InitiatedByApp = tostring(parse_json(tostring(InitiatedBy.app)).displayName)
+| extend InitiatedByUser = tostring(parse_json(tostring(InitiatedBy.user)).userPrincipalName)
+| extend Actor = iff(isnotempty(InitiatedByApp), InitiatedByApp, InitiatedByUser)
+| where isnotempty(Actor)
+| join kind=leftanti baseline on $left.OperationName == $right.OperationName

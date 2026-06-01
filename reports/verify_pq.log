@@ -1,0 +1,42 @@
+/Users/marc.chisinevski/.venvs/azcli/lib/python3.9/site-packages/urllib3/__init__.py:35: NotOpenSSLWarning: urllib3 v2 only supports OpenSSL 1.1.1+, currently the 'ssl' module is compiled with 'LibreSSL 2.8.3'. See: https://github.com/urllib3/urllib3/issues/3020
+  warnings.warn(
+[sdl_client] session = kql-proof-fbfe7c67-c796-46d2-901d-7b948657d89b
+Verifying 17 .pq files run cleanly on SDL ...
+(Each file tested in TWO forms: as-written and whitespace-collapsed.)
+
+  ✓ 01_anomalous_signin_location_increase.pq         [as-written] matching=63.0 (3.0s)
+  ✓ 01_anomalous_signin_location_increase.pq         [collapsed] matching=63.0 (1.8s)
+  ✓ 02_rare_audit_activity_by_app.pq                 [as-written] matching=3.0 (2.0s)
+  ✓ 02_rare_audit_activity_by_app.pq                 [collapsed] matching=3.0 (2.6s)
+  ✓ 03_azure_rare_subscription_ops.pq                [as-written] matching=48.0 (1.9s)
+  ✓ 03_azure_rare_subscription_ops.pq                [collapsed] matching=48.0 (2.2s)
+  ✓ 04_daily_signin_location_trend.pq                [as-written] matching=63.0 (3.2s)
+  ✓ 04_daily_signin_location_trend.pq                [collapsed] matching=63.0 (5.4s)
+  ✓ 05_daily_network_traffic_per_source.pq           [as-written] matching=126.0 (3.9s)
+  ✓ 05_daily_network_traffic_per_source.pq           [collapsed] matching=126.0 (2.9s)
+  ✓ 06_daily_process_execution_trend.pq              [as-written] matching=10.0 (2.2s)
+  ✓ 06_daily_process_execution_trend.pq              [collapsed] matching=10.0 (3.6s)
+  ✓ 07_rare_user_agent_by_app.pq                     [as-written] matching=20.0 (2.8s)
+  ✓ 07_rare_user_agent_by_app.pq                     [collapsed] matching=20.0 (3.2s)
+  ✓ 08_network_ioc_match.pq                          [as-written] matching=118.0 (3.0s)
+  ✓ 08_network_ioc_match.pq                          [collapsed] matching=118.0 (4.6s)
+  ✓ 09_new_processes_24h.pq                          [as-written] matching=2.0 (2.9s)
+  ✓ 09_new_processes_24h.pq                          [collapsed] matching=2.0 (2.5s)
+  ✓ 10_sharepoint_anomaly.pq                         [as-written] matching=400.0 (3.0s)
+  ✓ 10_sharepoint_anomaly.pq                         [collapsed] matching=400.0 (3.4s)
+  ✓ 11_palo_alto_beacon.pq                           [as-written] matching=125.0 (3.2s)
+  ✓ 11_palo_alto_beacon.pq                           [collapsed] matching=125.0 (2.2s)
+  ✓ 12_suspicious_windows_logon_off_hours.pq         [as-written] matching=1.0 (2.9s)
+  ✓ 12_suspicious_windows_logon_off_hours.pq         [collapsed] matching=1.0 (2.4s)
+  ✓ 13_insider_threat_sensitive_files.pq             [as-written] matching=18.0 (4.8s)
+  ✓ 13_insider_threat_sensitive_files.pq             [collapsed] matching=18.0 (4.2s)
+  ✓ 14_priv_escalation.pq                            [as-written] matching=1.0 (2.4s)
+  ✓ 14_priv_escalation.pq                            [collapsed] matching=1.0 (2.5s)
+  ✓ 15_slow_brute_force.pq                           [as-written] matching=43.0 (2.1s)
+  ✓ 15_slow_brute_force.pq                           [collapsed] matching=43.0 (3.3s)
+  ✓ 16_suspicious_travel.pq                          [as-written] matching=20.0 (2.1s)
+  ✓ 16_suspicious_travel.pq                          [collapsed] matching=20.0 (2.0s)
+  ✓ 17_daily_baseline_new_locations.pq               [as-written] matching=20.0 (4.2s)
+  ✓ 17_daily_baseline_new_locations.pq               [collapsed] matching=20.0 (3.5s)
+
+PASS: 17    FAIL: 0
